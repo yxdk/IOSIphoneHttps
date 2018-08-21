@@ -10,7 +10,7 @@
 早上在撸HTML5，有个下载页的需求，需要安卓和苹果，一般来说苹果用第三方或者AppStore的，但这次是在内部使用的App和Ipa，所以得有个方法来绕过这个，其实第三方实现的原理也是如此，来看下执行步骤。
 
 首先，下载plist 文件模版：点我下载
-外链：https://github.com/sheep0704/IOSIphoneHttps/blob/master/x5.plist
+外链：https://github.com/julyNineteen/IOSIphoneHttps/blob/master/x5.plist
 注意细节，如果自己复制模版，不要漏下下面的声明：
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
  
@@ -23,7 +23,6 @@
 
 <a href="itms-services:///?action=download-manifest&url=https://github.com/sheep0704/IOSIphoneHttps/blob/master/x5.plist" class="button button-stripe">苹果正版下载</a>
  
- 
 
 
 点击测试，发现并没有效果，苹果浏览器会提示连接不上github.com，我们拦截下请求看看，发现了 Provisional headers are shown！ 
@@ -32,15 +31,6 @@
 原因： itms-services应该不支持自签名的SSL证书，要搞一下ssl证书来放plist文件
 
 
-
-分享下效果图：
-
-奥特曼超人 
-
-
 总结：一开始调试几次发现不行，因为用的是NGR，映射了127.0.0.1的Tomcat，所以后来替换回我们自己的服务器地址，经过测试是可行的，所以建议中间不要有转发的过程，直接用外网服务器进行测试。 
 
 
-|| 版权声明：本文为博主杜锦阳原创文章，转载请注明出处。
-
-http://blog.csdn.net/djy1992/article/details/70267202
